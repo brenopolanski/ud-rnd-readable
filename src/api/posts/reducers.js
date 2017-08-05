@@ -1,11 +1,13 @@
 import {
   FETCH_POST_SUCCESS,
   FETCHING_POST,
-  FETCH_POST_FAIL
+  FETCH_POST_FAIL,
+  CHANGE_SORT_BY
 } from './constants';
 
 const initState = {
   posts: null,
+  sort: 'voteScore',
   fetching: false,
   fetched: false,
   error: null
@@ -33,6 +35,12 @@ export default function reducer(state = initState, action) {
         ...state,
         error: action.payload,
         fetching: false
+      }
+
+    case CHANGE_SORT_BY:
+      return {
+        ...state,
+        sort: action.payload
       }
 
     default:

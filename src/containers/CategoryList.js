@@ -8,7 +8,7 @@ import { fetchCategories } from '../api/categories/actions';
 import Category from '../components/Category';
 
 /**
- * Home Page
+ * Category List on home page
  */
 class CategoryList extends React.Component {
   componentWillMount() {

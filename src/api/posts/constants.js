@@ -1,3 +1,5 @@
 export const FETCH_POST_SUCCESS = 'FETCH_POST_SUCCESS';
 export const FETCHING_POST = 'FETCHING_POST';
 export const FETCH_POST_FAIL = 'FETCH_POST_FAIL';
+
+export const CHANGE_SORT_BY = 'CHANGE_SORT_BY';
