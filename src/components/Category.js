@@ -10,19 +10,17 @@ const Category = (props) => {
   const { category } = props;
 
   return (
-    <div>
-      <ListItem
-        primaryText={ category.name }
-        leftAvatar={
-          <Avatar
-            color={pinkA200} backgroundColor={transparent}
-            style={{ left: 8 }}
-          >
-            { category.name[0].toUpperCase() }
-          </Avatar>
-        }
-      />
-    </div>
+    <ListItem
+      primaryText={ category.name }
+      leftAvatar={
+        <Avatar
+          color={pinkA200} backgroundColor={transparent}
+          style={{ left: 8 }}
+        >
+          { category.name[0].toUpperCase() }
+        </Avatar>
+      }
+    />
   )
 }
 

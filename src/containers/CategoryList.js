@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { List, ListItem } from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
-import { pinkA200, transparent } from 'material-ui/styles/colors';
+import { List } from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
 
 import { fetchCategories } from '../api/categories/actions';
 import Category from '../components/Category';
@@ -27,7 +26,10 @@ class CategoryList extends React.Component {
       <div>
         {
           mappedCat && mappedCat.length
-            ? <List>{mappedCat}</List>
+            ? <List>
+                <Subheader>CATEGORIES</Subheader>
+                {mappedCat}
+              </List>
             : 'No Categories'
         }
       </div>
