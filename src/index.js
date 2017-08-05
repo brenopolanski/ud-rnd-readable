@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import { Provider } from 'react-redux';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import {fade} from 'material-ui/utils/colorManipulator';
@@ -11,6 +12,7 @@ import {deepOrange700, deepOrange600, deepOrange500, deepOrange400, deepOrange30
         grey500, grey100, grey400, grey300,
         fullBlack, darkBlack, white} from 'material-ui/styles/colors';
 
+import store from './store';
 import App from './App';
 
 // Needed for onTouchTap
@@ -41,8 +43,10 @@ const muiTheme = getMuiTheme({
 
 ReactDOM.render(
   <MuiThemeProvider muiTheme={muiTheme}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </MuiThemeProvider>, document.getElementById('root')
 );

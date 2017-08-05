@@ -23,10 +23,17 @@ export const fetchCategories = () => {
     })
     .then(res => res.json())
     .then(res => {
-      dispatch({
-        type: FETCH_CATEGORY_SUCCESS,
-        payload: res
-      });
+      if (res.categories) {
+        dispatch({
+          type: FETCH_CATEGORY_SUCCESS,
+          payload: res.categories
+        });
+      } else {
+        dispatch({
+          type: FETCH_CATEGORY_FAIL,
+          payload: 'Unknown error'
+        });
+      }
     })
     .catch(err => {
       dispatch({

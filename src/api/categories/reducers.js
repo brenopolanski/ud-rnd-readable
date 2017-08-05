@@ -12,7 +12,7 @@ const initState = {
 }
 
 
-export const reducer = (state = initState, action) => {
+export default function reducer(state = initState, action) {
   switch (action.type) {
     case FETCHING_CATEGORY:
       return {
@@ -23,16 +23,16 @@ export const reducer = (state = initState, action) => {
     case FETCH_CATEGORY_SUCCESS:
       return {
         ...state,
-        categories: action.payload
+        categories: action.payload,
         fetching: false,
-        fetched: true,
+        fetched: true
       }
 
     case FETCH_CATEGORY_FAIL:
       return {
         ...state,
-        error: action.payload
-        fetching: false,
+        error: action.payload,
+        fetching: false
       }
 
     default:

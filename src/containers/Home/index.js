@@ -1,14 +1,15 @@
-import React from 'react'
+import React from 'react';
+import CategoryList from '../CategoryList';
 
 /**
  * Home Page
  */
-class Home extends React.Component {
-  render() {
-    return (
-      <div>Test</div>
-    )
-  }
+const Home = () => {
+  return (
+    <div>
+      <CategoryList />
+    </div>
+  )
 }
 
-export default Home;
+export default Home
