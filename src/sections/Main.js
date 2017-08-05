@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 
+import Home from '../containers/Home'
 
 /**
  * Main component that handle routes
@@ -13,8 +14,7 @@ const Main = () => {
       }}
     >
       <Switch>
-        {/* <Route exact path="/" component={MyReads} />
-        <Route path="/search" component={Search} /> */}
+         <Route exact path="/" component={Home} />
       </Switch>
     </main>
   )
