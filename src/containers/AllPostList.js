@@ -5,6 +5,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 import { fetchPosts, changeSortOption } from '../api/posts/actions';
+import Posts from '../components/Posts';
 import PostOverview from '../components/PostOverview';
 import {formatText} from '../utils';
 
@@ -24,44 +25,13 @@ class AllPostList extends React.Component {
   render() {
     const { posts, sort } = this.props;
 
-    const mappedCat = posts && posts.length
-      ? posts
-        .filter(post => !post.deleted) // don't show deleted post
-        .sort((a, b) => a[posts.sort] < b[posts.sort]) // sort by
-        .map((post, i) => <PostOverview post={post} key={i} />)
-      : 'No posts';
-
-    const sortOptionEls = ['voteScore', 'timestamp'].map((option, i) => (
-      <MenuItem
-        value={option}
-        key={i}
-        primaryText={formatText(option)}
-      />
-    ));
-
     return (
 
       <div>
-        {
-          mappedCat && mappedCat.length
-            ? (
-                <div>
-                  <Subheader>ALL POSTS</Subheader>
-
-                  <SelectField
-                    floatingLabelText="Sort By"
-                    value={sort}
-                    onChange={this.changeSortOption}
-                    autoWidth={true}
-                  >
-                    {sortOptionEls}
-                  </SelectField>
-
-                  {mappedCat}
-                </div>
-              )
-            : 'No Categories'
-        }
+        <Posts
+          posts={posts}
+          sort={sort}
+        />
       </div>
     )
   }

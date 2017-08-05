@@ -7,6 +7,7 @@ import Subheader from 'material-ui/Subheader';
 import { fetchCategories } from '../api/categories/actions';
 import Category from '../components/Category';
 
+
 /**
  * Category List on home page
  */
