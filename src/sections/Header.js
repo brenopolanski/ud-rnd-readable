@@ -42,7 +42,7 @@ class Header extends React.Component {
           onRequestChange={open => this.setState({open})}
         >
           <AppBar
-            title="My Reads"
+            title="Readable"
           />
 
           <MenuItem
@@ -50,7 +50,7 @@ class Header extends React.Component {
             containerElement={<Link to={'/'} />}>Home</MenuItem>
           <MenuItem
             onTouchTap={this.handleClose}
-            containerElement={<Link to={'/search'} />}>Search</MenuItem>
+            containerElement={<Link to={'/category'} />}>Category</MenuItem>
         </Drawer>
       </header>
     )

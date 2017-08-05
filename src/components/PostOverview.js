@@ -27,6 +27,10 @@ const PostOverview = (props) => {
       />
 
       <CardText expandable={false}>
+        { post.body }
+      </CardText>
+
+      <CardText expandable={false}>
         <Chip>
           <Avatar
             size={32}
@@ -37,10 +41,6 @@ const PostOverview = (props) => {
           </Avatar>
           { post.category }
         </Chip>
-      </CardText>
-
-      <CardText expandable={true}>
-        { post.body }
       </CardText>
     </Card>
   )

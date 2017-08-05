@@ -5,8 +5,20 @@ export const AUTH_TOKEN = process.env.AUTH_TOKEN || 'asdjkfl234324kql5234';
 export const API_ENDPOINTS = {
   CATEGORIES: `${API_URI_BASE}/categories`,
   POSTS: `${API_URI_BASE}/posts`,
-  CATERGOY_POSTS: (cat) => `${API_URI_BASE}/${cat}/posts`,
-  POST: (id) => `${API_URI_BASE}/posts/${id}`,
-  COMMENTS: (id) => `${API_URI_BASE}/posts/${id}/comments`,
-  COMMENT: (id) => `${API_URI_BASE}/comments/${id}`,
+  CATEGORY_POSTS: '',
+  setCategoryPostsURI: function(cat) {
+    this.CATEGORY_POSTS = `${API_URI_BASE}/${cat}/posts`;
+  },
+  POST: '',
+  setPostURI: function(id) {
+    this.POST = `${API_URI_BASE}/posts/${id}`;
+  },
+  COMMENTS: '',
+  setCommentsURI: function(id) {
+    this.COMMENTS = `${API_URI_BASE}/posts/${id}/comments`;
+  },
+  COMMENT: '',
+  setCommentURI: function(id) {
+    this.COMMENT = `${API_URI_BASE}/comments/${id}`;
+  }
 };
