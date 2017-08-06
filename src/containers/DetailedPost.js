@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
+import Divider from 'material-ui/Divider';
 import CircularProgress from 'material-ui/CircularProgress';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
@@ -16,6 +18,7 @@ import {formatTimestamp} from '../utils/';
 import { votePost } from '../api/votePost/actions';
 
 import PostFormModal from './PostFormModal';
+import Comments from './Comments';
 
 
 /**
@@ -83,16 +86,18 @@ class DetailedPost extends React.Component {
     return (
       <article>
         <h2>{post.title}</h2>
-        <Chip>
-          <Avatar
-            size={32}
-            color={pinkA200}
-            backgroundColor={transparent}
-          >
-            { post.category ? post.category[0].toUpperCase() : '' }
-          </Avatar>
-          { post.category }
-        </Chip>
+        <Link to={`/category/${post.category}`}>
+          <Chip>
+            <Avatar
+              size={32}
+              color={pinkA200}
+              backgroundColor={transparent}
+            >
+              { post.category ? post.category[0].toUpperCase() : '' }
+            </Avatar>
+            { post.category }
+          </Chip>
+        </Link>
 
         <p>by {post.author} on {formatTimestamp(post.timestamp)}</p>
         <p><i>Vote Score: {post.voteScore}</i></p>
@@ -122,12 +127,16 @@ class DetailedPost extends React.Component {
 
         <Paper
           zDepth={1}
-          style={{
-            marginTop: 20,
-            padding: 20
-          }}
-        >
+            style={{
+              marginTop: 20,
+              padding: 20
+            }}
+          >
           <p>{post.body}</p>
+
+          <Divider />
+
+          <Comments id={post.id} />
         </Paper>
       </article>
     )

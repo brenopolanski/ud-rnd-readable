@@ -40,7 +40,7 @@ class PostFormModal extends React.Component {
     const title = post ? `Edit "${post.title}"` : 'New Post';
 
     return (
-      <div>
+      <div style={{display: 'inline'}}>
         <RaisedButton
           label={label}
           onTouchTap={this.handleOpen}

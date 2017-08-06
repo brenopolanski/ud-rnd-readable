@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form'
 
 import categories from './api/categories/reducers';
-import comment from './api/comments/reducer';
+import comments from './api/comments/reducer';
 import post from './api/post/reducers';
 import posts from './api/posts/reducers';
 import votePost from './api/votePost/reducers';
@@ -13,7 +13,7 @@ import modalDialog from './containers/PostFormModal/reducers';
 export default combineReducers({
   form: formReducer,
   categories,
-  comment,
+  comments,
   post,
   posts,
   categoryPosts,

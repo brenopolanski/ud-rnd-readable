@@ -28,8 +28,8 @@ export const fetchComments = (id) => {
       type: FETCHING_COMMENT
     });
 
-    API_ENDPOINTS.setCategoryPostsURI(id);
-
+    API_ENDPOINTS.setCommentsURI(id);
+    console.log(API_ENDPOINTS.COMMENTS)
     fetch(API_ENDPOINTS.COMMENTS, {
       headers
     })
