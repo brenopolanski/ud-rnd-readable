@@ -7,7 +7,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 import { pinkA200, transparent } from 'material-ui/styles/colors';
 
-import { fetchPost, editPost } from '../api/post/actions';
+import {
+  deletePost,
+  editPost,
+  fetchPost
+} from '../api/post/actions';
 import {formatTimestamp} from '../utils/';
 import { votePost } from '../api/votePost/actions';
 
@@ -32,6 +36,12 @@ class DetailedPost extends React.Component {
     // re-fetch post if vote is successfully updated
     ( updating && !nextUpdating && nextUpdated )
       && this.props.fetchPost(id);
+  }
+
+  delete = () => {
+    const { id } = this.props.match.params;
+
+    this.props.deletePost(id);
   }
 
   edit = (values) => {
@@ -95,7 +105,7 @@ class DetailedPost extends React.Component {
 
         <RaisedButton
           label="Delete"
-          onTouchTap={() => this.votePost('upVote')}
+          onTouchTap={() => this.delete()}
         />
 
         <RaisedButton
@@ -139,6 +149,7 @@ const mapStateToProps = ({ post, votePost }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    deletePost: (id) => dispatch(deletePost(id)),
     fetchPost: (id) => dispatch(fetchPost(id)),
     editPost: (post) => dispatch(editPost(post)),
     votePost: (id, vote) => dispatch(votePost(id, vote))

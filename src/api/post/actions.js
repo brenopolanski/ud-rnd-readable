@@ -5,13 +5,47 @@ import {
 
   UPDATE_POST_SUCCESS,
   UPDATING_POST,
-  UPDATE_POST_FAIL
+  UPDATE_POST_FAIL,
+
+  DELETE_POST_SUCCESS,
+  DELETING_POST,
+  DELETE_POST_FAIL
 } from './constants';
 
 import {
   API_ENDPOINTS,
   headers
 } from '../apiEndpoints.config';
+
+
+export const deletePost = (id) => {
+  return (dispatch) => {
+    dispatch({
+      type: DELETING_POST
+    });
+
+    API_ENDPOINTS.setPostURI(id);
+
+    fetch(API_ENDPOINTS.POST, {
+      method: 'DELETE',
+      headers
+    })
+    .then(res => {
+      if (res.status === 200) {
+        dispatch({
+          type: DELETE_POST_SUCCESS,
+          payload: res
+        });
+      }
+    })
+    .catch(err => {
+      dispatch({
+        type: DELETE_POST_FAIL,
+        payload: err
+      });
+    });
+  };
+};
 
 
 export const fetchPost = (id) => {
@@ -40,6 +74,7 @@ export const fetchPost = (id) => {
     });
   };
 };
+
 
 export const editPost = (post) => {
   return (dispatch) => {

@@ -5,7 +5,11 @@ import {
 
   UPDATE_POST_SUCCESS,
   UPDATING_POST,
-  UPDATE_POST_FAIL
+  UPDATE_POST_FAIL,
+
+  DELETE_POST_SUCCESS,
+  DELETING_POST,
+  DELETE_POST_FAIL
 } from './constants';
 
 const initState = {
@@ -60,6 +64,28 @@ export default function reducer(state = initState, action) {
         ...state,
         error: action.payload,
         updating: false
+      }
+
+
+    case DELETING_POST:
+      return {
+        ...state,
+        deleting: true
+      };
+
+    case DELETE_POST_SUCCESS:
+      return {
+        ...state,
+        post: null,
+        deleting: false,
+        deleted: true
+      }
+
+    case DELETE_POST_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+        deleting: false
       }
 
     default:
