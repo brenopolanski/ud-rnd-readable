@@ -25,7 +25,8 @@ class PostFormModal extends React.Component {
       label,
       handleSubmit,
       post,
-      categories
+      categories,
+      selectedCategory
     } = this.props;
 
     const actions = [
@@ -57,6 +58,7 @@ class PostFormModal extends React.Component {
             post={post}
             onSubmit={handleSubmit}
             categories={categories}
+            selectedCategory={selectedCategory}
           />
         </Dialog>
       </div>

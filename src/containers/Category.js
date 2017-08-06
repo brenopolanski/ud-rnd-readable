@@ -50,7 +50,7 @@ class Category extends React.Component {
           selected={posts.category}
         />
 
-        <NewPost />
+        <NewPost selectedCategory={posts.category}/>
 
         <Posts
           posts={posts.posts}

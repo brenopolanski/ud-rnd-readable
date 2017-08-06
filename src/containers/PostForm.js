@@ -36,7 +36,8 @@ class PostForm extends React.Component {
       pristine,
       submitting,
       categories,
-      post
+      post,
+      selectedCategory
     } = this.props;
 
     // Submit button
@@ -73,6 +74,7 @@ class PostForm extends React.Component {
     const renderSelectField = ({
       input,
       label,
+      value,
       meta: { touched, error },
       children,
       ...custom
@@ -80,6 +82,7 @@ class PostForm extends React.Component {
       <SelectField
         floatingLabelText={label}
         errorText={touched && error}
+        value={value}
         {...input}
         onChange={(event, index, value) => input.onChange(value)}
         children={children}
@@ -87,23 +90,28 @@ class PostForm extends React.Component {
       />
 
     // render options for category select
-    const categoryOptions = (categories)
-      ? categories.map((cat, i) => {
+    let categoryOptions = '';
+
+    if (categories) {
+      categoryOptions = categories.map((cat, i) => {
         const name = cat.name;
         return <MenuItem
           key={i}
           value={name}
           primaryText={name}
         />
-      })
-      : (
-          post
-            ? <MenuItem
-                value={post.category}
-                primaryText={post.category}
-              />
-            : ''
-        );
+      });
+    } else if (post) {
+      categoryOptions = <MenuItem
+        value={post.category}
+        primaryText={post.category}
+      />
+    }
+
+    // render default category
+    let defaultCategory = '';
+    if (selectedCategory) defaultCategory = selectedCategory;
+    if (post) defaultCategory = post.category
 
     return (
       <form
@@ -114,6 +122,7 @@ class PostForm extends React.Component {
           name="title"
           component={renderTextField}
           label="Title"
+          disabled={false}
           type="text"
         />
         <br />
@@ -126,9 +135,10 @@ class PostForm extends React.Component {
         />
         <br />
         <Field
+          label="Category"
+          value={defaultCategory}
           name="category"
           component={renderSelectField}
-          label="Category"
         >
           {categoryOptions}
         </Field>
@@ -137,6 +147,7 @@ class PostForm extends React.Component {
           name="body"
           component={renderTextField}
           label="Content"
+          disabled={false}
           rows={15}
         />
 

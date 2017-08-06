@@ -23,13 +23,17 @@ class NewPost extends React.Component {
   }
 
   render() {
-    const { categories } = this.props;
+    const {
+      categories,
+      selectedCategory
+    } = this.props;
 
     return (
       <PostFormModal
         label="New Post"
         handleSubmit={this.newPost}
         categories={categories}
+        selectedCategory={selectedCategory}
       />
     )
   }
