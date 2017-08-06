@@ -10,6 +10,8 @@ If it's not installed, in the terminal, run:
 npm i -g create-react-app
 ```
 
+Go to https://github.com/udacity/reactnd-project-readable-starter and set up the local server as instructed there.
+
 Then run app with one of the following methods:
 
 #### ... with `yarn`:
