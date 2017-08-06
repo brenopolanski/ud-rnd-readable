@@ -3,6 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 
 import Home from '../containers/Home';
 import Category from '../containers/Category';
+import DetailedPost from '../containers/DetailedPost';
+
 
 /**
  * Main component that handle routes
@@ -17,6 +19,7 @@ const Main = () => {
       <Switch>
          <Route exact path="/" component={Home} />
          <Route path="/category" component={Category} />
+         <Route path="/posts/:id" component={DetailedPost} />
       </Switch>
     </main>
   );

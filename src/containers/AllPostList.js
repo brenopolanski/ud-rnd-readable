@@ -1,13 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Subheader from 'material-ui/Subheader';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 
-import { fetchPosts, changeSortOption } from '../api/posts/actions';
 import Posts from '../components/Posts';
-import PostOverview from '../components/PostOverview';
-import {formatText} from '../utils';
+import { fetchPosts, changeSortOption } from '../api/posts/actions';
+import { votePost } from '../api/votePost/actions';
 
 
 /**
@@ -18,8 +14,22 @@ class AllPostList extends React.Component {
     this.props.fetchPosts();
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { updating } = this.props;
+    const nextUpdating = nextProps.updating;
+    const nextUpdated = nextProps.updated;
+
+    // re-fetch posts if vote is successfully updated
+    ( updating && !nextUpdating && nextUpdated )
+      && this.props.fetchPosts();
+  }
+
   changeSortOption = (e, i, value) => {
     this.props.changeSortOption(value);
+  }
+
+  votePost = (id, vote) => {
+    this.props.votePost(id, vote);
   }
 
   render() {
@@ -31,26 +41,32 @@ class AllPostList extends React.Component {
         <Posts
           posts={posts}
           sort={sort}
+          votePost={this.votePost}
         />
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ posts }) => {
+const mapStateToProps = ({ posts, votePost }) => {
   return {
     posts: posts.posts,
     sort: posts.sort,
     fetching: posts.fetching,
     fetched: posts.fetched,
-    error: posts.error
+    error: posts.error,
+
+    updating: votePost.updating,
+    updated: votePost.updated,
+    voteError: votePost.error
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchPosts: () => dispatch(fetchPosts()),
-    changeSortOption: (option) => dispatch(changeSortOption(option))
+    changeSortOption: (option) => dispatch(changeSortOption(option)),
+    votePost: (id, vote) => dispatch(votePost(id, vote))
   }
 }
 

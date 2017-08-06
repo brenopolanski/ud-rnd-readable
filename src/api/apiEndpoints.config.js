@@ -22,3 +22,9 @@ export const API_ENDPOINTS = {
     this.COMMENT = `${API_URI_BASE}/comments/${id}`;
   }
 };
+
+export const headers = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json',
+  'Authorization': AUTH_TOKEN,
+}

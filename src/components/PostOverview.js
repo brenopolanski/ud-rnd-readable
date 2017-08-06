@@ -1,7 +1,9 @@
 import React from 'react';
-import {Card, CardHeader, CardText} from 'material-ui/Card';
+import { Link } from 'react-router-dom';
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
+import RaisedButton from 'material-ui/RaisedButton';
 import { pinkA200, transparent } from 'material-ui/styles/colors';
 
 import {formatTimestamp} from '../utils/';
@@ -11,7 +13,7 @@ import {formatTimestamp} from '../utils/';
  * Render post overview
  */
 const PostOverview = (props) => {
-  const { post } = props;
+  const { post, votePost } = props;
 
   const postedAt = formatTimestamp(post);
 
@@ -22,8 +24,6 @@ const PostOverview = (props) => {
       <CardHeader
         title={ post.title }
         subtitle={ `By ${post.author} at ` + postedAt + ` | Score: ${post.voteScore}` }
-        actAsExpander={true}
-        showExpandableButton={true}
       />
 
       <CardText expandable={false}>
@@ -42,6 +42,25 @@ const PostOverview = (props) => {
           { post.category }
         </Chip>
       </CardText>
+
+      <CardActions>
+        <Link to={`/posts/${post.id}`}>
+          <RaisedButton
+            label="Go to Post"
+          />
+        </Link>
+
+        <RaisedButton
+          label="Up Vote"
+          primary={true}
+          onTouchTap={() => votePost(post.id, 'upVote')}
+        />
+        <RaisedButton
+          label="Down Vote"
+          secondary={true}
+          onTouchTap={() => votePost(post.id, 'downVote')}
+        />
+      </CardActions>
     </Card>
   )
 }
