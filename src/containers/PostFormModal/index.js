@@ -23,8 +23,9 @@ class PostFormModal extends React.Component {
     const {
       visible,
       label,
-      edit,
-      post
+      handleSubmit,
+      post,
+      categories
     } = this.props;
 
     const actions = [
@@ -35,6 +36,8 @@ class PostFormModal extends React.Component {
       />
     ];
 
+    const title = post ? `Edit "${post.title}"` : 'New Post';
+
     return (
       <div>
         <RaisedButton
@@ -43,7 +46,7 @@ class PostFormModal extends React.Component {
         />
 
         <Dialog
-          title={`Edit "${post.title}"`}
+          title={title}
           actions={actions}
           modal={false}
           open={visible || false}
@@ -52,7 +55,8 @@ class PostFormModal extends React.Component {
         >
           <PostForm
             post={post}
-            onSubmit={edit}
+            onSubmit={handleSubmit}
+            categories={categories}
           />
         </Dialog>
       </div>

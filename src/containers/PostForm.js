@@ -1,6 +1,8 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import MenuItem from 'material-ui/MenuItem';
+import SelectField from 'material-ui/SelectField';
 import { Field, reduxForm } from 'redux-form';
 
 
@@ -11,9 +13,11 @@ class PostForm extends React.Component {
       post
     } = this.props;
 
-    initialize({
+    post && initialize({
       title: post.title,
-      body: post.body
+      body: post.body,
+      author: post.author,
+      category: post.category
     });
   }
 
@@ -31,6 +35,7 @@ class PostForm extends React.Component {
       handleSubmit,
       pristine,
       submitting,
+      categories,
       post
     } = this.props;
 
@@ -50,6 +55,7 @@ class PostForm extends React.Component {
       input,
       label,
       rows,
+      disabled,
       meta: { touched, error },
       ...custom
     }) =>
@@ -57,11 +63,47 @@ class PostForm extends React.Component {
         hintText={label}
         floatingLabelText={label}
         errorText={touched && error}
+        disabled={disabled}
         rows={rows || 1}
         fullWidth={true}
         {...input}
         {...custom}
       />
+
+    const renderSelectField = ({
+      input,
+      label,
+      meta: { touched, error },
+      children,
+      ...custom
+    }) =>
+      <SelectField
+        floatingLabelText={label}
+        errorText={touched && error}
+        {...input}
+        onChange={(event, index, value) => input.onChange(value)}
+        children={children}
+        {...custom}
+      />
+
+    // render options for category select
+    const categoryOptions = (categories)
+      ? categories.map((cat, i) => {
+        const name = cat.name;
+        return <MenuItem
+          key={i}
+          value={name}
+          primaryText={name}
+        />
+      })
+      : (
+          post
+            ? <MenuItem
+                value={post.category}
+                primaryText={post.category}
+              />
+            : ''
+        );
 
     return (
       <form
@@ -73,15 +115,29 @@ class PostForm extends React.Component {
           component={renderTextField}
           label="Title"
           type="text"
-          validate={[this.required]}
         />
+        <br />
+        <Field
+          name="author"
+          component={renderTextField}
+          label="Author"
+          disabled={(post && post.author)}
+          type="text"
+        />
+        <br />
+        <Field
+          name="category"
+          component={renderSelectField}
+          label="Category"
+        >
+          {categoryOptions}
+        </Field>
         <br />
         <Field
           name="body"
           component={renderTextField}
           label="Content"
           rows={15}
-          validate={[this.required]}
         />
 
         <br />

@@ -9,7 +9,11 @@ import {
 
   DELETE_POST_SUCCESS,
   DELETING_POST,
-  DELETE_POST_FAIL
+  DELETE_POST_FAIL,
+
+  POST_POST_SUCCESS,
+  POSTING_POST,
+  POST_POST_FAIL
 } from './constants';
 
 const initState = {
@@ -18,6 +22,10 @@ const initState = {
   fetched: false,
   updating: false,
   updated: false,
+  deleting: false,
+  deleted: false,
+  posting: false,
+  posted: false,
   error: null
 }
 
@@ -66,7 +74,6 @@ export default function reducer(state = initState, action) {
         updating: false
       }
 
-
     case DELETING_POST:
       return {
         ...state,
@@ -86,6 +93,26 @@ export default function reducer(state = initState, action) {
         ...state,
         error: action.payload,
         deleting: false
+      }
+
+    case POSTING_POST:
+      return {
+        ...state,
+        posting: true
+      };
+
+    case POST_POST_SUCCESS:
+      return {
+        ...state,
+        posting: false,
+        posted: true
+      }
+
+    case POST_POST_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+        posting: false
       }
 
     default:

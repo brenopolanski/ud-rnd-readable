@@ -99,7 +99,7 @@ class DetailedPost extends React.Component {
 
         <PostFormModal
           label="edit"
-          edit={this.edit}
+          handleSubmit={this.edit}
           post={post}
         />
 

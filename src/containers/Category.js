@@ -6,6 +6,7 @@ import { fetchCategories } from '../api/categories/actions';
 
 import CategorySelect from '../components/CategorySelect';
 import Posts from '../components/Posts';
+import NewPost from '../containers/NewPost';
 
 /**
  * Show posts from a selected category
@@ -17,10 +18,15 @@ class Category extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const { category } = this.props.posts;
+    const { cat } = this.props.match.params;
 
     // set a default category after categories are fetched
-    !nextProps.posts.category && nextProps.categories.fetched
-      && this.props.changeCategory(nextProps.categories.categories[0].name);
+    if (cat) {
+      !category && this.props.changeCategory(cat); // set default category based on url param
+    } else {
+      !nextProps.posts.category && nextProps.categories.fetched
+        && this.props.changeCategory(nextProps.categories.categories[0].name);
+    }
 
     // fetch posts if selected category changes
     const newCategory = nextProps.posts.category;
@@ -43,6 +49,8 @@ class Category extends React.Component {
           changeOption={this.changeCategory}
           selected={posts.category}
         />
+
+        <NewPost />
 
         <Posts
           posts={posts.posts}

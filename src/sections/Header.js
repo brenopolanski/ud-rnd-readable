@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import AppBar from 'material-ui/AppBar';
@@ -36,6 +36,7 @@ class Header extends React.Component {
             </IconButton>
           }
         />
+
 
         <Drawer open={this.state.open}
           docked={false}

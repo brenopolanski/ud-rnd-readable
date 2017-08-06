@@ -9,7 +9,11 @@ import {
 
   DELETE_POST_SUCCESS,
   DELETING_POST,
-  DELETE_POST_FAIL
+  DELETE_POST_FAIL,
+
+  POST_POST_SUCCESS,
+  POSTING_POST,
+  POST_POST_FAIL
 } from './constants';
 
 import {
@@ -109,3 +113,30 @@ export const editPost = (post) => {
     });
   };
 };
+
+export const newPost = (post) => {
+  return (dispatch) => {
+    dispatch({
+      type: POSTING_POST
+    });
+
+    fetch(API_ENDPOINTS.POSTS, {
+      method: 'POST',
+      body: JSON.stringify(post),
+      headers
+    })
+    .then(res => res.json())
+    .then(res => {
+      dispatch({
+        type: POST_POST_SUCCESS,
+        payload: res
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: POST_POST_FAIL,
+        payload: err
+      });
+    });
+  };
+}

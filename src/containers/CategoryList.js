@@ -13,7 +13,8 @@ import Category from '../components/Category';
  */
 class CategoryList extends React.Component {
   componentWillMount() {
-    this.props.fetchCategories();
+    !this.props.fetching && !this.props.fetched
+      && this.props.fetchCategories();
   }
 
   render() {
